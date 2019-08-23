@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class EmployeeController {
@@ -32,5 +33,15 @@ public class EmployeeController {
     public String updateData(@PathVariable String name,@PathVariable int id){
         String str=employeeDao.updateData(id,name);     //for updating the existing data of database
         return str;
+    }
+    @GetMapping(value = "/getcombineddata")
+    public  List<Map<String, Object>> getCombinedData(){
+        List<Map<String,Object>> list=employeeDao.getCominedData();
+        return list;
+    }
+    @PostMapping(value = "/savecombineddata")
+    public List<Map<String, Object>> saveCombinedData(@RequestBody Employee employee){
+        List<Map<String, Object>> list=employeeDao.insertCombinedData(employee);
+        return list;
     }
 }

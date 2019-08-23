@@ -4,6 +4,15 @@ public class Employee {
     private int id;
     private String name;
     private  String city;
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     public int getId() {
         return id;

@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-//import java.util.Map;
+import java.util.Map;
 
 @Repository
 public class EmployeeDao implements EmployeeRepo {
@@ -40,5 +40,17 @@ public class EmployeeDao implements EmployeeRepo {
     public String updateData(Integer id, String name) {
         jdbcTemplate.update("update employee set name = ? where id = ?",new Object[]{name,id});
         return "data updated";      //in this we are updating the existing data
+    }
+
+    @Override
+    public List<Map<String, Object>> getCominedData() {
+        List<Map<String, Object>> list=jdbcTemplate.queryForList("select a.name, a.city,b.dept from employee a,department b where a.dept_id=b.id");
+        return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> insertCombinedData(Employee employee) {
+        jdbcTemplate.update("insert into employee values(?,?,?,?,?)",new Object[]{employee.getId(),employee.getName(),employee.getCity(),employee.getDepartment().getId(),employee.getDepartment().getDept()});
+        return "Data Saved";
     }
 }
