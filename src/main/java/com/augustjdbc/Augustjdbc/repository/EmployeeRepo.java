@@ -5,5 +5,8 @@ import com.augustjdbc.Augustjdbc.model.Employee;
 import java.util.List;
 
 public interface EmployeeRepo {
-    List<Employee> getEmpList();
+    List<Employee> getEmpList();            //Employee is the class name of model class
+    Employee getEmp(String name);
+    String insertData(Employee employee);
+    String updateData(Integer id, String name);
 }
