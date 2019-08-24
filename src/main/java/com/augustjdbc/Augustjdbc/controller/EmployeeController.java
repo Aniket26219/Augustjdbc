@@ -1,6 +1,7 @@
 package com.augustjdbc.Augustjdbc.controller;
 
 import com.augustjdbc.Augustjdbc.dao.EmployeeDao;
+import com.augustjdbc.Augustjdbc.model.Department;
 import com.augustjdbc.Augustjdbc.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +41,8 @@ public class EmployeeController {
         return list;
     }
     @PostMapping(value = "/savecombineddata")
-    public List<Map<String, Object>> saveCombinedData(@RequestBody Employee employee){
-        List<Map<String, Object>> list=employeeDao.insertCombinedData(employee);
-        return list;
+    public String saveCombinedData(@RequestBody Employee employee){
+        String str=employeeDao.insertCombinedData(employee);
+        return str;
     }
 }

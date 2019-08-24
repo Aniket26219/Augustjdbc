@@ -4,7 +4,7 @@ public class Employee {
     private int id;
     private String name;
     private  String city;
-    private Department department;
+    public Department department;
 
     public Department getDepartment() {
         return department;

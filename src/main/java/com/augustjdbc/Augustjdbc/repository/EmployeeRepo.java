@@ -11,5 +11,5 @@ public interface EmployeeRepo {
     String insertData(Employee employee);
     String updateData(Integer id, String name);
     List<Map<String, Object>> getCominedData();
-    List<Map<String, Object>> insertCombinedData(Employee employee);
+    String insertCombinedData(Employee employee);
 }

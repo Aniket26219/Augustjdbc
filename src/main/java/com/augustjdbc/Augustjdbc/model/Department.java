@@ -1,8 +1,8 @@
 package com.augustjdbc.Augustjdbc.model;
 
 public class Department {
-    int id;
-    String dept;
+    private int id;
+    private String name;
 
     public int getId() {
         return id;
@@ -12,11 +12,11 @@ public class Department {
         this.id = id;
     }
 
-    public String getDept() {
-        return dept;
+    public String getName() {
+        return name;
     }
 
-    public void setDept(String dept) {
-        this.dept = dept;
+    public void setName(String name) {
+        this.name = name;
     }
 }

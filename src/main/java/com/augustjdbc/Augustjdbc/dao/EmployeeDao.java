@@ -49,8 +49,21 @@ public class EmployeeDao implements EmployeeRepo {
     }
 
     @Override
-    public List<Map<String, Object>> insertCombinedData(Employee employee) {
-        jdbcTemplate.update("insert into employee values(?,?,?,?,?)",new Object[]{employee.getId(),employee.getName(),employee.getCity(),employee.getDepartment().getId(),employee.getDepartment().getDept()});
-        return "Data Saved";
+    public String insertCombinedData(Employee employee) {
+        Department dept=jdbcTemplate.queryForObject("select * from department where name=? or id=?",
+                new Object[]{employee.getDepartment().getName(),employee.getDepartment().getId()},new BeanPropertyRowMapper<>(Department.class));
+        if(dept==null){
+            jdbcTemplate.update("insert into department values(?,?)",
+                    new Object[]{employee.department.getId(),employee.department.getName()});
+            jdbcTemplate.update("insert into employee values(?,?,?,?)",
+                    new Object[]{employee.getId(),employee.getName(),employee.getCity(),employee.getDepartment().getId()});
+            return "Data inserted";
+        }
+        jdbcTemplate.update("insert into employee values(?,?,?,?)",
+                new Object[]{employee.getId(),employee.getName(),employee.getCity(),employee.getDepartment().getId()});
+        return "Data inserted";
     }
 }
+// in insertCombinedData method firstly we are taking the department name and checking whether it is present in the table or not by using the select query
+// and if condition and if present then it will return the department name which is not a null and if it is null then the department name and id will be
+// inserted in the table and if it is not null only the employee data will be inserted
